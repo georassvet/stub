@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Stub</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+
+    <div class="row">
+        <datalist id="delayDatalist">
+            <option th:each="item : ${delays}" th:text="${item}" th:value="${item}">
+        </datalist>
+        <datalist id="stepDatalist">
+            <option th:each="item : ${steps}" th:text="${item}" th:value="${item}">
+        </datalist>
+        <datalist id="timeDatalist">
+            <option th:each="item : ${times}" th:text="${item}" th:value="${item}">
+        </datalist>
+
+        <div class="col-md-12">
+            <form class="row g-3" id="form" th:fragment="form" th:object="${form}"
+                  th:method="post">
+                <div class="col-md-4">
+                    <label for="serviceInput">Services</label>
+                    <select id="serviceInput" class="form-select" size="5" th:field="*{services}" multiple>
+                        <option th:each="service: ${services}" th:text="${service}" th:value="${service}"></option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <label for="startDelayInput" class="form-label">Start, ms</label>
+                    <input class="form-control" list="delayDatalist" id="startDelayInput" th:field="*{startDelay}">
+                </div>
+                <div class="col-md-1">
+                    <label for="stopDelayInput" class="form-label">Stop, ms</label>
+                    <input class="form-control" list="delayDatalist" id="stopDelayInput" th:field="*{stopDelay}">
+                </div>
+                <div class="col-md-1">
+                    <label for="delayStepInput" class="form-label">Step, ms</label>
+                    <input class="form-control" list="stepDatalist" id="delayStepInput" th:field="*{step}">
+                </div>
+                <div class="col-md-1">
+                    <label for="timeStepInput" class="form-label">Time, min</label>
+                    <input class="form-control" list="timeDatalist" id="timeStepInput" th:field="*{time}">
+                </div>
+                <div class="col-md-3">
+                    <label for="startAtInput" class="form-label">Start At</label>
+                    <input class="form-control" type="datetime-local" id="startAtInput" th:field="*{startAt}">
+                </div>
+                <div class="col-md-1">
+                    <button id="addDelayTask" class="btn btn-primary mb-3">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn btn-sm btn-primary" id="clear-delays">Clear delays</button>
+            <hr>
+            <h6>Services</h6>
+            <div id="services">
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-sm btn-primary" id="delete-all-tasks">Delete tasks</button>
+            <hr>
+            <table class="table table-sm">
+                <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>StartAt</th>
+                    <th>Delay</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="tasks">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="request">Request</label>
+            <textarea id="request" class="form-control" rows="5"></textarea>
+        </div>
+        <div class="col-md-6">
+            <label for="response">Response</label>
+            <textarea id="response" class="form-control" rows="5"></textarea>
+        </div>
+    </div>
+</div>
+</body>
+</html>
